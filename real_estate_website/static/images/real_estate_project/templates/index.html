@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Home - Real Estate{% endblock %}
+{% block content %}
+<section class="bg-dark text-white text-center p-5">
+  <div class="container">
+    <h1 class="fw-bold">Find Your Dream Home</h1>
+    <p class="lead">Luxury villas, modern apartments, and beachside houses at your fingertips</p>
+    <a href="{{ url_for('show_properties') }}" class="btn btn-primary btn-lg mt-3">Browse Properties</a>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Featured Properties</h2>
+    <div class="row">
+      {% for property in properties %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card shadow border-0 h-100">
+          <img src="{{ url_for('static', filename='images/' ~ property.image) }}" class="card-img-top" style="height:250px;object-fit:cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ property.title }}</h5>
+            <p class="text-muted"><i class="bi bi-geo-alt"></i> {{ property.location }}</p>
+            <p class="fw-bold text-success">${{ property.price }}</p>
+            <a href="{{ url_for('property_details', id=property.id) }}" class="btn btn-outline-dark btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

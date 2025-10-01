@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Properties - Real Estate{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Available Properties</h2>
+      <p class="text-muted">Discover handpicked luxury homes, apartments, and villas</p>
+    </div>
+    <div class="row">
+      {% for property in properties %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card shadow-lg border-0 h-100">
+          <div class="position-relative">
+            <img src="{{ url_for('static', filename='images/' ~ property.image) }}" class="card-img-top" style="height:250px;object-fit:cover;">
+            <span class="badge bg-success position-absolute top-0 end-0 m-2 fs-6">${{ property.price }}</span>
+          </div>
+          <div class="card-body">
+            <h5 class="fw-bold">{{ property.title }}</h5>
+            <p class="text-muted"><i class="bi bi-geo-alt"></i> {{ property.location }}</p>
+            <div class="d-flex justify-content-between small text-muted">
+              <span><i class="bi bi-house-door"></i> {{ property.bedrooms }} BR</span>
+              <span><i class="bi bi-arrows-fullscreen"></i> {{ property.size }} sq.ft</span>
+            </div>
+          </div>
+          <div class="card-footer bg-white border-0 d-flex justify-content-between">
+            <a href="{{ url_for('property_details', id=property.id) }}" class="btn btn-outline-primary btn-sm">View Details</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary btn-sm">Contact Agent</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <header class="header-bg p-5 text-center">
+        <div class="container">
+            <h1 class="display-2 fw-bold">Find Your Next Home</h1>
+            <p class="lead">Elite Estates: The key to your dream property.</p>
+        </div>
+    </header>
+
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 text-success">About Elite Estates</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="{{ company_image_url }}" class="img-fluid rounded shadow-lg" alt="Company Office">
+                </div>
+                <div class="col-lg-6">
+                    <h3>Our Mission & History</h3>
+                    <p class="lead">Elite Estates has been a pillar in the real estate market since **2005**. Our mission is simple: to connect people with their ideal properties through **integrity, expertise, and personalized service**.</p>
+                    <p>We pride ourselves on a transparent, client-first approach, ensuring a smooth and stress-free transaction every time.</p>
+                    
+                    <h3 class="mt-4">Experience & Achievements</h3>
+                    <div class="row text-center mt-3">
+                        <div class="col-4">
+                            <i class="bi bi-calendar-check display-4 text-success"></i>
+                            <p class="h4 mt-2 fw-bold">19+</p>
+                            <small>Years of Service</small>
+                        </div>
+                        <div class="col-4">
+                            <i class="bi bi-house-door display-4 text-success"></i>
+                            <p class="h4 mt-2 fw-bold">1,500+</p>
+                            <small>Completed Projects</small>
+                        </div>
+                        <div class="col-4">
+                            <i class="bi bi-people display-4 text-success"></i>
+                            <p class="h4 mt-2 fw-bold">99%</p>
+                            <small>Customer Trust</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section id="properties" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 text-success">Featured Properties</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for property in properties %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="{{ property.image_url }}" class="card-img-top property-card-img" alt="{{ property.title }}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-truncate">{{ property.title }}</h5>
+                            <p class="card-text text-muted mb-1"><i class="bi bi-geo-alt me-2"></i>{{ property.location }}</p>
+                            <p class="card-text fw-bold text-success display-6 mb-3">{{ property.price }}</p>
+                            <a href="{{ url_for('property_details', property_id=property.id) }}" class="btn btn-success mt-auto">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="amenities" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 text-success">Our Standard Amenities</h2>
+            <div class="row text-center g-4">
+                {% set amenities = [
+                    {'icon': 'bi-droplet-fill', 'name': 'Swimming Pool'},
+                    {'icon': 'bi-lightning-charge-fill', 'name': 'Power Backup'},
+                    {'icon': 'bi-wifi', 'name': 'High-Speed Wi-Fi'},
+                    {'icon': 'bi-lock-fill', 'name': '24/7 Security'},
+                    {'icon': 'bi-tree-fill', 'name': 'Green Park Area'},
+                    {'icon': 'bi-bicycle', 'name': 'Gym/Fitness Center'},
+                    {'icon': 'bi-truck-front-fill', 'name': 'Dedicated Parking'},
+                    {'icon': 'bi-puzzle-fill', 'name': 'Children’s Area'},
+                    {'icon': 'bi-cup-fill', 'name': 'Clubhouse Access'}
+                ] %}
+                {% for amenity in amenities %}
+                <div class="col-md-4 col-sm-6 col-lg-4">
+                    <div class="p-3 bg-white rounded shadow-sm h-100">
+                        <i class="bi {{ amenity.icon }} display-4 text-success mb-3"></i>
+                        <h5 class="fw-bold">{{ amenity.name }}</h5>
+                        <p class="text-muted small">Available in most of our premium listings.</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="agents" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 text-success">Meet Our Expert Agents</h2>
+            <div class="row text-center g-4">
+                {% for agent in agents %}
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <img src="{{ agent.photo_url }}" class="card-img-top rounded-circle mx-auto mt-3" alt="{{ agent.name }}" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ agent.name }}</h4>
+                            <p class="text-success fw-bold">{{ agent.designation }}</p>
+                            <p class="card-text small"><i class="bi bi-phone me-2"></i>{{ agent.phone }}</p>
+                            <p class="card-text small"><i class="bi bi-envelope me-2"></i>{{ agent.email }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="reviews" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 text-success">Customer Testimonials</h2>
+            <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for review in reviews %}
+                    <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                        <div class="d-flex flex-column align-items-center text-center p-5">
+                            <img src="{{ review.photo_url }}" class="rounded-circle mb-3" alt="{{ review.name }}" style="width: 100px; height: 100px; object-fit: cover;">
+                            <blockquote class="blockquote">
+                                <p class="mb-0 fs-5 text-dark">"{{ review.feedback }}"</p>
+                                <footer class="blockquote-footer mt-2">{{ review.name }}</footer>
+                            </blockquote>
+                            <div class="text-warning">
+                                {% for i in range(review.rating) %}<i class="bi bi-star-fill"></i>{% endfor %}
+                                {% for i in range(5 - review.rating) %}<i class="bi bi-star"></i>{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 text-success">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-7 mb-4">
+                    <h4 class="mb-3">Send us a Message</h4>
+                    <form action="{{ url_for('handle_contact_form') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg">Submit Request</button>
+                    </form>
+                </div>
+
+                <div class="col-lg-5">
+                    <h4 class="mb-3">Office Information</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="bi bi-geo-alt-fill me-3 text-success h5"></i><strong>Address:</strong> 123 Luxury Lane, Metropolis, CA 90210</li>
+                        <li class="mb-3"><i class="bi bi-telephone-fill me-3 text-success h5"></i><strong>Phone:</strong> (555) 123-9999</li>
+                        <li class="mb-3"><i class="bi bi-envelope-fill me-3 text-success h5"></i><strong>Email:</strong> info@eliteestates.com</li>
+                        <li class="mb-3"><i class="bi bi-clock-fill me-3 text-success h5"></i><strong>Working Hours:</strong> Mon-Fri: 9:00 AM - 5:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

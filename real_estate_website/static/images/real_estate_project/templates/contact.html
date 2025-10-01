@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Contact - Real Estate{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <h2 class="fw-bold">Get In Touch</h2>
+        <p>Have questions? Contact us today and our team will assist you.</p>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-telephone"></i> +1 234 567 890</li>
+          <li><i class="bi bi-envelope"></i> support@realestatepro.com</li>
+          <li><i class="bi bi-geo-alt"></i> 123 Luxury St, Beverly Hills, CA</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <form>
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Your Name" required>
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Your Email" required>
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="4" placeholder="Your Message"></textarea>
+          </div>
+          <button class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

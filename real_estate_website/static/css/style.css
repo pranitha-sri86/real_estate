@@ -1,0 +1,89 @@
+/* style.css */
+
+/* Customizing the main color */
+:root {
+    --bs-success: #008080; /* Teal/Sea Green for a professional real estate look */
+    --bs-success-rgb: 0, 128, 128;
+    --navbar-bg-color: #f8f9fa; /* Light Gray/Off-White for brighter look */
+    --navbar-text-color: #2c3e50; /* Deep Charcoal for strong contrast */
+}
+
+/* Override Bootstrap button color */
+.btn-success {
+    background-color: var(--bs-success);
+    border-color: var(--bs-success);
+}
+.btn-success:hover {
+    background-color: #006666;
+    border-color: #006666;
+}
+.text-success {
+     color: var(--bs-success) !important;
+}
+
+/* Ensure sections take up space for smooth scrolling */
+section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* Agent Photos (to prevent cropping and ensure a nice circle) */
+.agents img {
+    border: 3px solid var(--bs-success);
+}
+
+/* Customizing the Navbar Brand (Logo) */
+.navbar-brand img {
+    filter: invert(1); /* Makes a dark logo appear white on a dark navbar */
+}
+
+/* Footer links hover effect */
+footer a:hover {
+    color: #fff !important;
+    text-decoration: underline !important;
+}
+
+
+/* 1. Custom Navbar Styling */
+.navbar-custom {
+    background-color: var(--navbar-bg-color) !important; /* Apply charcoal background */
+      border-bottom: 1px solid #dee2e6; /* Optional: Add a subtle bottom border */
+}
+
+
+
+/* Set link color for the deep background */
+.navbar-custom .navbar-nav .nav-link,
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link.dropdown-toggle {
+    color: var(--navbar-text-color) !important;
+}
+
+
+/* Hover effect */
+.navbar-toggler-icon {
+    /* Since text is dark, we don't need to invert the default dark icon */
+    filter: none; 
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: var(--bs-success) !important; /* Use Teal as a highlight color */
+}
+
+/* Agent Photos (to prevent cropping and ensure a nice circle) */
+.agents img {
+    border: 3px solid var(--bs-success);
+}
+
+/* Ensure sections take up space for smooth scrolling */
+section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* Footer links hover effect */
+footer a:hover {
+    color: #fff !important;
+    text-decoration: underline !important;
+}
+

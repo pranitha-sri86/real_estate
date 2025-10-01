@@ -1,0 +1,5 @@
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+.navbar-brand { font-size: 1.5rem; }
+.card { border-radius: 15px; }
+.property-img { height: 250px; object-fit: cover; }
+footer { font-size: 0.9rem; }

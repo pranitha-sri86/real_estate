@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container my-5">
+        {% if property %}
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h1 class="display-4 fw-bold text-success">{{ property.title }}</h1>
+                <p class="lead text-muted"><i class="bi bi-geo-alt me-2"></i>{{ property.location }}</p>
+                <p class="display-5 text-primary fw-bolder">{{ property.price }}</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <img src="{{ url_for('static', filename='images/' + property.image) }}" class="img-fluid rounded shadow-lg" alt="{{ property.title }}" style="max-height: 500px; width: 100%; object-fit: cover;">
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-header bg-success text-white h4">
+                        Key Features
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="bi bi-house-door me-2 text-success"></i><strong>Type:</strong> {{ property.type }}</li>
+                        <li class="list-group-item"><i class="bi bi-bed me-2 text-success"></i><strong>Bedrooms:</strong> {{ property.beds }}</li>
+                        <li class="list-group-item"><i class="bi bi-rulers me-2 text-success"></i><strong>Area:</strong> {{ property.area_sqft | default('N/A') }} sq. ft.</li>
+                        <li class="list-group-item"><i class="bi bi-currency-dollar me-2 text-success"></i><strong>Cost:</strong> {{ property.price }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <h3 class="text-success mb-3">Additional Information</h3>
+                <p class="fs-5">{{ property.additional_info }}</p>
+                
+                <hr>
+
+                <h3 class="text-success mb-3">Interested? Contact an Agent</h3>
+                <a href="{{ url_for('index') }}#contact" class="btn btn-lg btn-outline-success">Inquire About This Property</a>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="alert alert-danger text-center">
+            <h4>Property Not Found</h4>
+            <p>The requested property ID is invalid or the property no longer exists.</p>
+            <a href="{{ url_for('index') }}#properties" class="btn btn-success">Back to Properties</a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

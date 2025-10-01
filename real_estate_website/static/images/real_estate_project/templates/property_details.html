@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Property Details - Real Estate{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <img src="{{ url_for('static', filename='images/' ~ property.image) }}" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bold">{{ property.title }}</h2>
+        <p class="text-muted"><i class="bi bi-geo-alt"></i> {{ property.location }}</p>
+        <h3 class="text-success mb-3">${{ property.price }}</h3>
+        <ul class="list-group mb-3">
+          <li class="list-group-item"><i class="bi bi-house-door"></i> Bedrooms: {{ property.bedrooms }}</li>
+          <li class="list-group-item"><i class="bi bi-arrows-fullscreen"></i> Size: {{ property.size }} sq.ft</li>
+        </ul>
+        <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">Contact Agent</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
